@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:hisnelmoslem/app/app.dart';
-import 'package:hisnelmoslem/app/init_services.dart';
+import 'package:hisnelmoslem/app.dart';
+import 'package:hisnelmoslem/error_screen.dart';
+import 'package:hisnelmoslem/init_services.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
   await initServices();
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
-  );
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
-
-  runApp(const MyApp());
+  ErrorWidget.builder = (FlutterErrorDetails details) =>
+      ErrorScreen(details: details);
+  runApp(const App());
 }
